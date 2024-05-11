@@ -1,23 +1,18 @@
-<nav class="navbar">
+<nav class="navbar is-full-width">
+  <div class="container">
     <div class="navbar-brand">
-        {{> crime-express-brand}}
-    </div>
-    <div class="navbar-menu" id="navMenu">
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a id="dashboard" class="button" href="/dashboard"> Dashboard </a>
-                    {{#if user.isAdmin}}
-                        <a id="admin" class="button" href="/admin"> Admin </a>
-                    {{/if}}
-                    <a id="about" class="button" href="/about"> About </a>
-                    <a id="logout" class="button" href="/logout"> Logout </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+      <a class="navbar-item" href="/dashboard">
+        <span class="icon"> <i class="fas fa-map-marker-alt"></i></span><span class="icon mr-1"> <i
+            class="fa-solid fa-police-box"></i></span><span><strong>Crime Express</strong></span>
 
-<script>
-    document.getElementById("{{active}}").classList.add("is-primary");
-</script>
+      </a>
+    </div>
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/report"> Submit Report </a>
+        <a class="navbar-item" href="/reports"> Reported Events </a>
+        <a class="navbar-item" href="/logout"> Logout <span class="is-size-7">({{user.email}})</span></a>
+      </div>
+    </div>
+  </div>
+</nav>

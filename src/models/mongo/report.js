@@ -1,17 +1,16 @@
-import Mongoose from "mongoose";
-
-const { Schema } = Mongoose;
-
+import { Schema, model } from "mongoose";
 const reportSchema = new Schema({
-  name: String,
-  latitude: Number,
-  longitude: Number,
-  category: String,
-  description: String,
-  locationid: {
-    type: Schema.Types.ObjectId,
-    ref: "Location",
-  },
+    reportName: String,
+    description: String,
+    reporter: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+    },
+    lat: String,
+    lng: String,
 });
-
-export const Report = Mongoose.model("Report", reportSchema);
+export const ReportMongoose = model("Report", reportSchema);

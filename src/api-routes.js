@@ -1,24 +1,19 @@
-import { userApi } from "./api/user-api.js";
-import { locationApi } from "./api/location-api.js";
-import { reportApi } from "./api/report-api.js";
-
+import { categoriesApi } from "./api/categories-api.js";
+import { reportsApi } from "./api/reports-api.js";
+import { userApi } from "./api/users-api.js";
 export const apiRoutes = [
-  { method: "GET", path: "/api/users", config: userApi.find },
-  { method: "POST", path: "/api/users", config: userApi.create },
-  { method: "DELETE", path: "/api/users", config: userApi.deleteAll },
-  { method: "GET", path: "/api/users/{id}", config: userApi.findOne },
-
-  { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
-
-  { method: "POST", path: "/api/locations", config: locationApi.create },
-  { method: "DELETE", path: "/api/locations", config: locationApi.deleteAll },
-  { method: "GET", path: "/api/locations", config: locationApi.find },
-  { method: "GET", path: "/api/locations/{id}", config: locationApi.findOne },
-  { method: "DELETE", path: "/api/locations/{id}", config: locationApi.deleteOne },
-
-  { method: "GET", path: "/api/reports", config: reportApi.find },
-  { method: "GET", path: "/api/reports/{id}", config: reportApi.findOne },
-  { method: "POST", path: "/api/locations/{id}/reports", config: reportApi.create },
-  { method: "DELETE", path: "/api/reports", config: reportApi.deleteAll },
-  { method: "DELETE", path: "/api/reports/{id}", config: reportApi.deleteOne },
+    { method: "GET", path: "/api/users", config: userApi.find },
+    { method: "POST", path: "/api/users", config: userApi.create },
+    { method: "DELETE", path: "/api/users", config: userApi.deleteAll },
+    { method: "GET", path: "/api/users/{id}", config: userApi.findOne },
+    { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
+    { method: "GET", path: "/api/categories", config: categoriesApi.find },
+    { method: "GET", path: "/api/categories/{id}", config: categoriesApi.findOne },
+    { method: "POST", path: "/api/categories", config: categoriesApi.create },
+    { method: "DELETE", path: "/api/categories/{id}", config: categoriesApi.deleteOne },
+    { method: "DELETE", path: "/api/categories", config: categoriesApi.deleteAll },
+    { method: "GET", path: "/api/reports", config: reportsApi.findAll },
+    { method: "GET", path: "/api/categories/{id}/reports", config: reportsApi.findByCategory },
+    { method: "POST", path: "/api/categories/{id}/reports", config: reportsApi.makeReport },
+    { method: "DELETE", path: "/api/reports", config: reportsApi.deleteAll },
 ];
