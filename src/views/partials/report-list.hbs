@@ -1,0 +1,24 @@
+<Card title="Donations to date">
+  <table class="table is-fullwidth">
+    <thead>
+      <th>Report Name</th>
+      <th>Description</th>
+      <th>Category</th>
+    </thead>
+    <tbody>
+      {{#each reports}}
+      <tr>
+        <td>
+          {{reportName}}
+        </td>
+        <td>
+          {{description}}
+        </td>
+        <td>
+          {{category.categoryName}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</Card>

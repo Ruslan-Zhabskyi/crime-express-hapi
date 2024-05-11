@@ -1,0 +1,38 @@
+<form action="/report" method="POST">
+  <div class="field">
+    <label class="label">Enter Report Name</label>
+    <input class="input" type="text" placeholder="Report Name" name="reportName" />
+  </div>
+
+  <div>
+    <div class=" box field is-horizontal">
+      <div class="field-body ml-6">
+        <div class="control is-expanded mt-2">
+            <label class="label">Enter Description</label>
+            <input class="input" type="text" placeholder="Enter Description" name="description"/>
+        </div>
+      </div>
+
+        <div class="field-body ml-6">
+            <div class="control is-expanded mt-2">
+          <label class="label">Select Category</label>
+        <div class="select">
+          <select name="category">
+            {{#each categories}}
+            <option value={{_id}}> {{categoryName}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field mt-2">
+    {{> coordinates}}
+  </div>
+  <div class="field">
+    <div class="control">
+      <button class="button is-success is-fullwidth">Submit Report</button>
+    </div>
+  </div>
+</form>
