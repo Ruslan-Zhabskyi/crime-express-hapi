@@ -14,7 +14,7 @@ export const reportStore = {
     async add(report) {
         console.log("adding");
         let newReport = new ReportMongoose({ ...report });
-        console.log("added donation:", newReport);
+        console.log("added report:", newReport);
         await newReport.save();
         console.log("saved");
         return newReport;
@@ -24,7 +24,7 @@ export const reportStore = {
     },
 
     async findOne(id) {
-        const report = await ReportMongoose.findOne({ report: id });
+        const report = await ReportMongoose.findOne({ _id: id }).lean();
         if (!report) {
             return null;
         }

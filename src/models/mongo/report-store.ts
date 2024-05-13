@@ -25,7 +25,7 @@ export const reportStore = {
         await ReportMongoose.deleteMany({});
     },
     async findOne(id: string) {
-        const report = await ReportMongoose.findOne({ report: id });
+        const report = await ReportMongoose.findOne({ _id: id });
         if (!report) {
             return null;
         }
