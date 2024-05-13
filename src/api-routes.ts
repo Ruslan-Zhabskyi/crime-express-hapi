@@ -19,4 +19,5 @@ export const apiRoutes = [
   { method: "GET" as const, path: "/api/categories/{id}/reports", config: reportsApi.findByCategory },
   { method: "POST" as const, path: "/api/categories/{id}/reports", config: reportsApi.makeReport },
   { method: "DELETE" as const, path: "/api/reports", config: reportsApi.deleteAll },
+  { method: "GET" as const, path: "/api/reports/{id}", config: reportsApi.findReportById },
 ];

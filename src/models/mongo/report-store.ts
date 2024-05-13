@@ -24,4 +24,11 @@ export const reportStore = {
     async delete() {
         await ReportMongoose.deleteMany({});
     },
+    async findOne(id: string) {
+        const report = await ReportMongoose.findOne({ report: id });
+        if (!report) {
+            return null;
+        }
+        return report;
+    },
 };

@@ -61,4 +61,21 @@ export const reportsApi = {
       return h.response().code(204);
     },
   },
+
+  findReportById: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request: Request, h: ResponseToolkit) {
+      try {
+        const report = (await db.reportStore.findOne(request.params.id)) as Report;
+        if (!report) {
+          return Boom.notFound("No Report with this id");
+        }
+        return h.response(report).code(200);
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+  },
 };

@@ -1,5 +1,6 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+
 export const reportsApi = {
     findAll: {
         auth: {
@@ -54,6 +55,23 @@ export const reportsApi = {
             console.log("delete...");
             await db.reportStore.delete();
             return h.response().code(204);
+        },
+    },
+
+    findReportById: {
+        auth: {
+            strategy: "jwt",
+        },
+        handler: async function (request, h) {
+            try {
+                const report = (await db.reportStore.findOne(request.params.id));
+                if (!report) {
+                    return Boom.notFound("No Report with this id");
+                }
+                return h.response(report).code(200);
+            } catch (err) {
+                return Boom.serverUnavailable("Database Error");
+            }
         },
     },
 };
