@@ -7,11 +7,19 @@ import { seedData } from "./seed-data.js";
 import { reportStore } from "./report-store";
 import { categoryStore } from "./category-store";
 import { Db } from "../../types/report-types.js";
+import bcrypt from 'bcrypt';
 
 const seedLib = mongooseSeeder.default;
 
 async function seed() {
   const seeder = seedLib(Mongoose);
+  // Hash passwords in seed data
+  for (let userKey in seedData.users) {
+    if (seedData.users.hasOwnProperty(userKey)) {
+      let user = seedData.users[userKey];
+      user.password = await bcrypt.hash(user.password, 10); // 10 is the saltRounds
+    }
+  }
   const dbData = await seeder.seed(seedData, { dropDatabase: false, dropCollections: true });
   console.log(dbData);
 }

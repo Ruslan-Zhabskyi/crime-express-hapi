@@ -1,5 +1,6 @@
 import { User } from "../../types/report-types.js";
 import { UserMongoose } from "./user.js";
+import bcrypt from 'bcrypt';
 
 export const userStore = {
   async find(): Promise<User[]> {
@@ -16,6 +17,7 @@ export const userStore = {
   },
 
   async add(user: any): Promise<User | null> {
+    user.password = await bcrypt.hash(user.password, 10);
     const newUser = new UserMongoose(user);
     const userObj = await newUser.save();
     return userObj;

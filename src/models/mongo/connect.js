@@ -6,9 +6,19 @@ import { userStore } from "./user-store.js";
 import { seedData } from "./seed-data.js";
 import { reportStore } from "./report-store.js";
 import { categoryStore } from "./category-store.js";
+import bcrypt from 'bcrypt';
+
 const seedLib = mongooseSeeder.default;
 async function seed() {
     const seeder = seedLib(Mongoose);
+    for (let userKey in seedData.users) {
+        if (seedData.users.hasOwnProperty(userKey)) {
+            let user = seedData.users[userKey];
+            if (user.password) {
+                user.password = await bcrypt.hash(user.password, 10);
+            }
+        }
+    }
     const dbData = await seeder.seed(seedData, { dropDatabase: false, dropCollections: true });
     console.log(dbData);
 }

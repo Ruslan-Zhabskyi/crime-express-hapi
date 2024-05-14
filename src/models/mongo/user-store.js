@@ -1,4 +1,5 @@
 import { UserMongoose } from "./user.js";
+import bcrypt from 'bcrypt';
 export const userStore = {
     async find() {
         const users = await UserMongoose.find().lean();
@@ -12,6 +13,7 @@ export const userStore = {
         return null;
     },
     async add(user) {
+        user.password = await bcrypt.hash(user.password, 10);
         const newUser = new UserMongoose(user);
         const userObj = await newUser.save();
         return userObj;
