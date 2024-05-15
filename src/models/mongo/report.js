@@ -12,5 +12,11 @@ const reportSchema = new Schema({
     },
     lat: String,
     lng: String,
+    temperature: String,
+    code: String,
+    windSpeed: String,
+    pressure: String,
+    windDirection: String,
+    timestamp: String,
 });
 export const ReportMongoose = model("Report", reportSchema);

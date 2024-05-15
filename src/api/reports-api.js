@@ -1,5 +1,7 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+import dotenv from "dotenv";
+import axios from "axios";
 
 export const reportsApi = {
     findAll: {
@@ -35,13 +37,38 @@ export const reportsApi = {
                 return Boom.notFound("No Category with this id");
             }
             const reportPayload = request.payload;
+            const apiKey = process.env.apiKey;
+            const lat = reportPayload.lat;
+            const lng = reportPayload.lng;
+            const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=metric&appid=${apiKey}`;
+            const result = await axios.get(requestUrl);
+            let temperature;
+            let code;
+            let windSpeed;
+            let pressure;
+            let windDirection;
+            let timestamp;
+            if (result.status == 200) {
+                const reading = result.data.current;
+                temperature = reading.temp;
+                code = reading.weather[0].id;
+                windSpeed = reading.wind_speed;
+                pressure = reading.pressure;
+                windDirection = reading.wind_deg;
+                timestamp = new Date().toLocaleString();}
             const report = {
                 reportName: reportPayload.reportName,
                 description: reportPayload.description,
                 reporter: request.auth.credentials._id,
                 category: category,
-                lat: reportPayload.lat,
-                lng: reportPayload.lng,
+                lat: lat,
+                lng: lng,
+                temperature: temperature,
+                code: code,
+                windSpeed: windSpeed,
+                pressure: pressure,
+                windDirection: windDirection,
+                timestamp: timestamp,
             };
             const newReport = (await db.reportStore.add(report));
             return h.response(newReport).code(200);
