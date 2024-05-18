@@ -30,4 +30,15 @@ export const reportStore = {
         }
         return report;
     },
+
+    async update(id, imageURL) {
+        console.log('id:', id); // Debugging line
+        console.log('imageURL:', imageURL); // Debugging line
+        const updatedReport = await ReportMongoose.findOneAndUpdate({ _id: id }, { imageURL }, { new: true }).lean();
+        console.log('updatedReport:', updatedReport); // Debugging line
+        if (!updatedReport) {
+            return null;
+        }
+        return updatedReport;
+    },
 };

@@ -112,18 +112,22 @@ export const reportsApi = {
       strategy: "jwt",
     },
     handler: async function (request: Request, h: ResponseToolkit) {
+      console.log('request.params.id:', request.params.id); // Debugging line
+      console.log('request.payload:', request.payload); // Debugging line
       const report = await db.reportStore.findOne(request.params.id);
+      console.log('report:', report); // Debugging line
       if (report === null) {
         return Boom.notFound("No report with this id");
       }
-      const updatePayload = request.payload as Partial<Report>;
-      if (updatePayload.imageURL) {
-        report.imageURL = updatePayload.imageURL;
+      const imageUrl = (request.payload as any).imageUrl;
+      console.log('imageUrl:', imageUrl); // Debugging line
+      if (!imageUrl) {
+        return Boom.badRequest("No imageUrl in request payload");
       }
-      const updatedReport = await db.reportStore.update(report);
+      const updatedReport = await db.reportStore.update(report._id, imageUrl);
+      console.log('updatedReport:', updatedReport); // Debugging line
       return h.response(updatedReport).code(200);
     },
   },
-
 
 };
