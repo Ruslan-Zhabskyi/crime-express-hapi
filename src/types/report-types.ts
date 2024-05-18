@@ -18,6 +18,7 @@ export interface Report {
   reporter: User | string;
   lat: number;
   lng: number;
+  imageURL: string;
 }
 
 export interface Db {

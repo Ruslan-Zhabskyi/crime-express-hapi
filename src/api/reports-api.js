@@ -48,6 +48,7 @@ export const reportsApi = {
             let pressure;
             let windDirection;
             let timestamp;
+            let imageURL = "";
             if (result.status == 200) {
                 const reading = result.data.current;
                 temperature = reading.temp;
@@ -69,6 +70,7 @@ export const reportsApi = {
                 pressure: pressure,
                 windDirection: windDirection,
                 timestamp: timestamp,
+                imageURL: imageURL,
             };
             const newReport = (await db.reportStore.add(report));
             return h.response(newReport).code(200);
@@ -101,4 +103,23 @@ export const reportsApi = {
             }
         },
     },
+
+    updateImage: {
+        auth: {
+            strategy: "jwt",
+        },
+        handler: async function (request, h) {
+            const report = await db.reportStore.findOne(request.params.id);
+            if (report === null) {
+                return Boom.notFound("No report with this id");
+            }
+            const updatePayload = request.payload;
+            if (updatePayload.imageURL) {
+                report.imageURL = updatePayload.imageURL;
+            }
+            const updatedReport = await db.reportStore.update(report);
+            return h.response(updatedReport).code(200);
+        },
+    },
+
 };

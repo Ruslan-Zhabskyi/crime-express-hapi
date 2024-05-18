@@ -18,5 +18,6 @@ const reportSchema = new Schema({
     pressure: String,
     windDirection: String,
     timestamp: String,
+    imageURL: String,
 });
 export const ReportMongoose = model("Report", reportSchema);

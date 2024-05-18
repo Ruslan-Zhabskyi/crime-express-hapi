@@ -59,6 +59,7 @@ export const seedData = {
             pressure: "1080",
             windDirection: "102",
             timestamp: "5/15/2024, 11:06:28 AM",
+            imageURL: "",
         },
         two: {
             reportName: "Night Event",
@@ -73,6 +74,7 @@ export const seedData = {
             pressure: "1005",
             windDirection: "85",
             timestamp: "5/15/2024, 10:06:28 PM",
+            imageURL: "",
         },
     },
 };
