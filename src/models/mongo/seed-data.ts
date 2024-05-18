@@ -74,7 +74,7 @@ export const seedData = {
       pressure: "1005",
       windDirection: "85",
       timestamp: "5/15/2024, 10:06:28 PM",
-      imageURL: "",
+      imageURL: "https://res.cloudinary.com/dvynpodck/image/upload/v1716052368/dfpqgzrmmccl2hxvnjd2.svg",
     },
   },
 };
