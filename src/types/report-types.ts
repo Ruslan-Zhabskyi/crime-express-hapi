@@ -18,6 +18,12 @@ export interface Report {
   reporter: User | string;
   lat: number;
   lng: number;
+  temperature: string;
+  code: string;
+  windSpeed: string;
+  pressure: string;
+  windDirection: string;
+  timestamp: string;
   imageURL: string;
 }
 
