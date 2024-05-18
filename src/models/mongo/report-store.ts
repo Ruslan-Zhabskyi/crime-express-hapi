@@ -42,4 +42,14 @@ export const reportStore = {
         }
         return updatedReport;
     },
+    async deleteImage(id: string): Promise<Report | null> {
+        console.log('id:', id); // Debugging line
+        const updatedReport = await ReportMongoose.findOneAndUpdate({ _id: id }, { imageURL: "" }, { new: true });
+        console.log('updatedReport:', updatedReport); // Debugging line
+        if (!updatedReport) {
+            return null;
+        }
+        return updatedReport;
+    },
+
 };

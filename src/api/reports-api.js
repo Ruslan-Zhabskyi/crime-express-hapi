@@ -126,5 +126,21 @@ export const reportsApi = {
             return h.response(updatedReport).code(200);
         },
     },
-
+    deleteImage: {
+        auth: {
+            strategy: "jwt",
+        },
+        handler: async function (request, h) {
+            console.log('request.params.id:', request.params.id); // Debugging line
+            const report = await db.reportStore.findOne(request.params.id);
+            console.log('report:', report); // Debugging line
+            if (!report) {
+                return Boom.notFound("No report with this id");
+            }
+            report.imageUrl = null;
+            const updatedReport = await db.reportStore.deleteImage(report.id);
+            console.log('updatedReport:', updatedReport); // Debugging line
+            return h.response(updatedReport).code(200);
+        },
+    },
 };

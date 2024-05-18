@@ -18,4 +18,5 @@ export const apiRoutes = [
     { method: "DELETE", path: "/api/reports", config: reportsApi.deleteAll },
     { method: "GET", path: "/api/reports/{id}", config: reportsApi.findReportById },
     { method: "PUT", path: "/api/reports/image/{id}", config: reportsApi.updateImage },
+    { method: "DELETE", path: "/api/reports/image/{id}", config: reportsApi.deleteImage },
 ];
